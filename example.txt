@@ -1,0 +1,12 @@
+This is a simple example text file.
+It contains several lines of text.
+This file is used to test the TextQuery program.
+Feel free to add more lines to test different scenarios.
+The quick brown fox jumps over the lazy dog.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The quick brown fox jumps over the lazy dog again.
+This is the end of the example text file.
