@@ -9,15 +9,18 @@
 #include <sstream>
 #include <format>
 
+// 策略模式 TODO
 
 class TextQuery
 {
-private:
+protected:
     std::vector<std::string> _FileContent;
     std::map<std::string, std::set<int>> _WordSetMap;
 
 public:
-    TextQuery(std::ifstream &FileContent)
+    TextQuery() = default;
+
+    void TextQueryInit(std::ifstream &FileContent)
     {
         std::string str;
         while(getline(FileContent, str)){
@@ -28,13 +31,16 @@ public:
                 _WordSetMap[word].insert(_FileContent.size());
             }
         }
-        std::cout << "Read Test..." << std::endl;
-        std::cout << "_FileContent size = " << _FileContent.size() << std::endl;
-        std::cout << "_WordSetMap size = " << _WordSetMap.size() << std::endl;
-
     }
 
-    std::string Query(std::string &TextToQuery)
+    virtual std::string Query(std::string &TextToQuery) = 0;
+};
+
+class WordQuery
+:public TextQuery
+{
+public:
+    std::string Query(std::string &TextToQuery) override
     {
         std::set<int> LineSet = _WordSetMap[TextToQuery];
         // 构造应答字符串
@@ -47,3 +53,36 @@ public:
         return response.str();
     }
 };
+
+class NotQuery
+:public TextQuery
+{
+public:
+    std::string Query(std::string &TextToQuery) override
+    {
+        std::set<int> LineSet = _WordSetMap[TextToQuery];
+        int n = _FileContent.size();
+        std::set<int> NotLineSet;
+        for(int i = 1; i <= n; ++i){
+            auto it = LineSet.find(i);
+            if(it == LineSet.end())
+                NotLineSet.insert(i);
+        }
+
+        // 构造应答字符串
+        std::stringstream response;
+        response << "Excuting Query for: " << TextToQuery << " Not in Text" << std::endl;
+        for(auto index : NotLineSet){
+            response << "(" << "line " << index << ") " << _FileContent[index - 1] << std::endl;
+        }
+        return response.str();
+    }
+};
+
+class OrQuery
+:public TextQuery
+{};
+
+class AndQuery
+:public TextQuery
+{};
