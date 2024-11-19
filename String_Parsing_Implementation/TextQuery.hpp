@@ -54,8 +54,16 @@ public:
     }
 };
 
-class NotQuery
+class BinaryQuery
 :public TextQuery
+{
+public:
+    virtual std::string Query(std::string){}
+    virtual std::string Query(std::string &TextToQuery1, std::string &TextToQuery2) = 0;
+};
+
+class NotQuery
+:public BinaryQuery
 {
 public:
     std::string Query(std::string &TextToQuery) override
@@ -80,9 +88,24 @@ public:
 };
 
 class OrQuery
-:public TextQuery
-{};
+:public BinaryQuery
+{
+public:
+    std::string Query(std::string &TextToQuery1, std::string &TextToQuery2) override
+    {
+        
+
+    }
+
+
+};
 
 class AndQuery
-:public TextQuery
-{};
+:public BinaryQuery
+{
+public:
+    std::string Query(std::string &TextToQuery1, std::string &TextToQuery2) override
+    {
+
+    }
+};
