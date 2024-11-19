@@ -39,10 +39,10 @@ public:
         std::set<int> LineSet = _WordSetMap[TextToQuery];
         // 构造应答字符串
         std::stringstream response;
-        response << "The word \"" << TextToQuery << "\" appears in lines " << LineSet.size() << " times" << std::endl\
-        << "The specific location of the occurrence # " << std::endl;
+        response << "Excuting Query for: " << TextToQuery << std::endl \
+        << "The word \"" << TextToQuery << "\" occurs " << LineSet.size() << " times" << std::endl;
         for(auto index : LineSet){
-            response << _FileContent[index - 1] << std::endl;
+            response << "(" << "line " << index << ") " << _FileContent[index - 1] << std::endl;
         }
         return response.str();
     }
